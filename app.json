@@ -1,0 +1,37 @@
+{
+  "name": "WhatsApp Bot Dashboard",
+  "description": "A WhatsApp bot management dashboard with multi-user support",
+  "repository": "https://github.com/yourusername/whatsapp-bot-dashboard",
+  "keywords": ["whatsapp", "bot", "nodejs", "express", "react"],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-google-chrome"
+    },
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "env": {
+    "NODE_ENV": {
+      "description": "Node environment",
+      "value": "production"
+    },
+    "DATABASE_URL": {
+      "description": "PostgreSQL database URL",
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql:mini"
+    }
+  ],
+  "scripts": {
+    "postdeploy": "npm run db:push --force"
+  }
+}
